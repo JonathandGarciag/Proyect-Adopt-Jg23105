@@ -50,7 +50,7 @@ export const register = async (req, res) => {
     const salt = bcryptjs.genSaltSync();
     user.password = bcryptjs.hashSync(password, salt);
  
-    await user.seve();
+    await user.save();
  
     res.status(200).json({
         user,
