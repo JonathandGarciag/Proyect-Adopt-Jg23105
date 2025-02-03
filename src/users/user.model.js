@@ -1,20 +1,31 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
 
-const userSchema = mongoose.Schema({
-    nombre: {
+const userSchema = Schema({
+    name: {
         type: String,
-        required: [true, "El nombre es requerido"],
+        required: [true, "Name is required"],
+        maxLenght: [25, "Max is 25 characters"]
     },
-    correo: {
+    surname: {
         type: String,
-        required: [true, "El correo es requerido"],
+        required: [true, "Name is required"],
+        maxLenght: [25, "Xant ve overcome 25 characters"]
+    },
+    username: {
+        type: String,
+        unique: true
+    },
+    email: {
+        type: String,
+        required: [true, "Email is required"],
         unique: true,
     },
     password: {
         type: String,
-        required: [true, "El correo es requerido"],
+        required: [true, "Password is required"],
+        minLenght: 8
     },
-    img: {
+    profilePicture: {
         type: String,
     },
     phone: {
@@ -32,11 +43,12 @@ const userSchema = mongoose.Schema({
         type: Boolean,
         default: true,
     },
-    google: {
-        type: Boolean,
-        default: false,
+},
+    {
+        timestamps: true,
+        versionKey: false
     }
-});
+);
 
 userSchema.methods.toJSON = function (){
     const { __v, password, _id, ...usuario } = this.toObject();
@@ -44,4 +56,4 @@ userSchema.methods.toJSON = function (){
     return usuario;
 }
 
-export default mongoose.model('User', userSchema);
+export default model('User', userSchema);

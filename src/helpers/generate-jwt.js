@@ -17,13 +17,6 @@ export const generarJWT = (uid = '') => {
             }
         );
 
-
-
-
-
-
-
-
         
     }); 
 }

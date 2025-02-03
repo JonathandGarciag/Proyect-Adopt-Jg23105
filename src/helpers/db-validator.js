@@ -15,7 +15,7 @@ export const existenteEmail = async (correo = '') =>{
 
     const existeEmail = await User.findOne({ correo });
 
-    if (!existeEmail) {
+    if (existeEmail) {
         throw new Error(`El correo ${correo} no existe en la base de datos`);
     }
 } 
