@@ -11,7 +11,7 @@ export const login = async (req, res) =>{
         const lowerUsername = username ? username.toLowerCase() : null;
 
         const user = await Usuario.findOne({
-            $or: [{ emai: lowerEmail }, { username: lowerUsername }]
+            $or: [{ email: lowerEmail }, { username: lowerUsername }]
         });
 
         if (!user) {
@@ -26,7 +26,7 @@ export const login = async (req, res) =>{
             });
         }
  
-        const validPassword = await verify(password, user.password);
+        const validPassword = await verify(user.password,password);
         if (!validPassword) {
             return res.status(400).json({
                 msg: "La contraseña es incorrecta"
@@ -38,7 +38,7 @@ export const login = async (req, res) =>{
         return res.status(200).json({
             msg: "Inicio de sesión exitoso!!",
             userDetails: {
-                username: user.usarname,
+                username: user.username,
                 token: token,
                 profilePicture: user.profile
             }
