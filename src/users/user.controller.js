@@ -105,3 +105,27 @@ export const deleteUser = async (req, res) => {
     }
 }
  
+export const updatePassword = async ( req, res ) => {
+    try {
+        
+        const { id } = req.params;
+        const { _id, email, username, ...data } = req.body;
+        const encryptedPassword = await hash (data.password);
+
+        const user = await Usuario.findByIdAndUpdate(id, data, {new: true});
+
+        res.status(200).json({
+            success: true,
+            msg: 'Password Actualizado',
+            user
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            sucess: false,
+            msg: 'Error al actualizar password',
+            error
+        })
+    }
+}
+

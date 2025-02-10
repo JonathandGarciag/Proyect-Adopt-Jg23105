@@ -1,0 +1,13 @@
+[{
+  "_id": {
+    "$oid": "67aa24bcfb71ac8dccf93cf3"
+  },
+  "name": "Rodulf",
+  "description": "Es un perro pastor",
+  "age": 3,
+  "type": "PERRO",
+  "keeper": {
+    "$oid": "67aa1c7afb71ac8dccf93ce6"
+  },
+  "status": false
+}]
